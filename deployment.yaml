@@ -1,11 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app-deployment
-  labels:
-    app: my-app
+  name: my-app-deployment  # Имя твоего деплоймента
 spec:
-  replicas: 2
+  replicas: 1  # Для интерактива лучше 1 копия
   selector:
     matchLabels:
       app: my-app
@@ -16,20 +14,8 @@ spec:
     spec:
       containers:
       - name: my-app-container
-        # ЗДЕСЬ ТВОЙ ОБРАЗ С DOCKER HUB
-        image: твой_логин/имя_образа:тег
+        image: vadimzakharov9243/myapp:latest  # Твой образ
         ports:
-        - containerPort: 8080
-        # Добавим проверку здоровья (полезно для Kubernetes)
-        livenessProbe:
-          httpGet:
-            path: /health  # Если у тебя есть такой эндпоинт
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /ready   # Если у тебя есть такой эндпоинт
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 10
+        - containerPort: 8080  # Если нужно
+        stdin: true      # ⬅️ Включаем ввод с клавиатуры
+        tty: true        # ⬅️ Включаем терминал
