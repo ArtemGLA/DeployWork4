@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment  # Имя твоего деплоймента
+spec:
+  replicas: 1  # Для интерактива лучше 1 копия
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: vadimzakharov9243/myapp:latest  # Твой образ
+        ports:
+        - containerPort: 8080  # Если нужно
+        stdin: true      # ⬅️ Включаем ввод с клавиатуры
+        tty: true        # ⬅️ Включаем терминал
