@@ -2,11 +2,15 @@ apiVersion: v1
 kind: Service
 metadata:
   name: my-app-service
+  labels:
+    app: my-app
+    version: v1
 spec:
   selector:
     app: my-app
   ports:
-  - protocol: TCP
+  - name: metrics
     port: 80
-    targetPort: 8080  # Порт твоей программы
+    targetPort: metrics  # Ссылается на имя порта из deployment
+    protocol: TCP
   type: NodePort
