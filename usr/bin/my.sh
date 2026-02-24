@@ -7,6 +7,6 @@ while true; do
         sleep 0.1
         echo "$i"
         sleep 0.1
-    done | ./main
+    done | ./hello
     sleep 5.0
 done
