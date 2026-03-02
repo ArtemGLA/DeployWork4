@@ -1,10 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app-deployment
+  name: app
   labels:
     app: my-app
-    version: v1
 spec:
   replicas: 1
   selector:
@@ -14,33 +13,10 @@ spec:
     metadata:
       labels:
         app: my-app
-        version: v1
-      annotations:
-        # Важно для Prometheus (этап 5)
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "8080"
-        prometheus.io/path: "/metrics"
     spec:
       containers:
-      - name: my-app-container
+      - name: my-container
         image: vadimzakharov9243/myapp:latest
-        imagePullPolicy: Always
-        # Для интерактивной работы (kubectl attach)
-        stdin: true
-        tty: true
         ports:
-        - name: metrics
-          containerPort: 8080  # Порт для метрик Prometheus
-          protocol: TCP
-        # Ресурсы важны для HPA (этап 8)
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "100m"
-          limits:
-            memory: "128Mi"
-            cpu: "200m"
-        # Для диагностики (необязательно)
-        env:
-        - name: APP_VERSION
-          value: "v1"
+        - containerPort: 80
+#rere
