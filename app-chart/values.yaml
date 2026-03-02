@@ -1,0 +1,15 @@
+
+replicaCount: 1
+name: app
+label: my-app
+image: vadimzakharov9243/myapp:latest
+servicePort: 8080
+containerPort: 80
+serviceType: NodePort
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
